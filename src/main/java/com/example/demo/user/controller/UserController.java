@@ -8,10 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -60,5 +57,18 @@ public class UserController {
         userServiceImpl.updateUser(userSeq, requestUser);
 
         return ResponseEntity.ok(ResponseResult.builder().build());
+    }
+
+    /**
+     * 사용자 목록 조회
+     * 
+     * @return result 사용자 목록
+     */
+    @GetMapping(value = "/user")
+    public ResponseEntity<ResponseResult> findAllByUser() {
+        
+        log.info("사용자 목록 조회");
+
+        return ResponseEntity.ok(ResponseResult.builder().body(userServiceImpl.findAllByUser()).build());
     }
 }

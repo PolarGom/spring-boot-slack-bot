@@ -22,7 +22,7 @@ import java.util.List;
 public class ResponseListBody<T> implements ResponseBody {
 
     @Builder.Default
-    private Long totalCount = 0L;
+    private int totalCount = 0;
 
     @Builder.Default
     private int totalPage = 0;

@@ -76,4 +76,14 @@ public class UserControllerTest extends CommonControllerTest {
             profileImgFis.close();
         }
     }
+
+    @Test
+    @DisplayName("사용자 목록 조회 테스트")
+    public void testFindAllByUser() throws Exception {
+
+        this.mockMvc.perform(get("/api/v1/user"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+    }
 }

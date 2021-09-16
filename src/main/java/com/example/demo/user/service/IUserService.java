@@ -1,5 +1,6 @@
 package com.example.demo.user.service;
 
+import com.example.demo.common.dto.response.ResponseBody;
 import com.example.demo.common.exception.CommonException;
 import com.example.demo.user.dto.request.RequestUser;
 
@@ -27,4 +28,6 @@ public interface IUserService {
      * @throws CommonException
      */
     void updateUser(Integer userSeq, RequestUser requestUser) throws CommonException;
+
+    ResponseBody findAllByUser() throws CommonException;
 }
