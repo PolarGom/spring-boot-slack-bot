@@ -1,5 +1,6 @@
 package com.example.demo.user.controller;
 
+import com.example.demo.common.dto.response.ResponseResult;
 import com.example.demo.user.dto.request.RequestUser;
 import com.example.demo.user.service.IUserService;
 import com.example.demo.user.validation.UserValidationGroup;
@@ -35,13 +36,13 @@ public class UserController {
      * @return result 사용자 아이디
      */
     @PostMapping(value = "/user/join")
-    public ResponseEntity<String> joinUser(@Validated(UserValidationGroup.joinUser.class) RequestUser requestUser) {
+    public ResponseEntity<ResponseResult> joinUser(@Validated(UserValidationGroup.joinUser.class) RequestUser requestUser) {
 
         log.info("사용자 등록 정보: {}", requestUser.toString());
 
         userServiceImpl.joinUser(requestUser);
 
-        return ResponseEntity.ok(requestUser.getId());
+        return ResponseEntity.ok(ResponseResult.builder().build());
     }
 
     /**
@@ -52,12 +53,12 @@ public class UserController {
      * @return result 사용자 아이디
      */
     @PostMapping(value = "/user/{userSeq}")
-    public ResponseEntity<String> joinUser(@PathVariable Integer userSeq, @Valid RequestUser requestUser) {
+    public ResponseEntity<ResponseResult> joinUser(@PathVariable Integer userSeq, @Valid RequestUser requestUser) {
 
         log.info("{} 키 사용자 수정 정보: {}", userSeq, requestUser.toString());
 
         userServiceImpl.updateUser(userSeq, requestUser);
 
-        return ResponseEntity.ok(requestUser.getId());
+        return ResponseEntity.ok(ResponseResult.builder().build());
     }
 }

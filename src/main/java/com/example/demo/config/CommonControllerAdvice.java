@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.common.dto.response.ResponseResult;
 import com.example.demo.common.exception.CommonException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -33,11 +34,13 @@ public class CommonControllerAdvice {
     }
 
     @ExceptionHandler({ CommonException.class })
-    public ResponseEntity<String> commonException(CommonException exception) {
+    public ResponseEntity<ResponseResult> commonException(CommonException exception) {
 
         log.error(String.format("Advice: %s", exception.getErrorMsg()), exception);
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getErrorMsg());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                ResponseResult.builder().success(false).errMsg(exception.getErrorMsg()).build()
+        );
     }
 
     /**
@@ -47,13 +50,15 @@ public class CommonControllerAdvice {
      * @return result 오류난 정보 반환
      */
     @ExceptionHandler({MethodArgumentNotValidException.class})
-    public ResponseEntity<String> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException exception) {
+    public ResponseEntity<ResponseResult> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException exception) {
 
         log.error(String.format("Advice: MethodArgumentNotValidException %s", exception.getMessage()), exception);
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(exception.getBindingResult().getAllErrors().stream().findFirst()
-                        .map(objectError -> objectError.getDefaultMessage()).orElse("[Err01]처리 중 오류가 발생하였습니다."));
+                .body(
+                        ResponseResult.builder().success(false).errMsg(exception.getBindingResult().getAllErrors().stream().findFirst()
+                                .map(objectError -> objectError.getDefaultMessage()).orElse("[Err01]처리 중 오류가 발생하였습니다.")).build()
+                );
     }
 
     /**
@@ -63,12 +68,14 @@ public class CommonControllerAdvice {
      * @return result 오류난 정보 반환
      */
     @ExceptionHandler({BindException.class})
-    public ResponseEntity<String> bindExceptionHandler(BindException exception) {
+    public ResponseEntity<ResponseResult> bindExceptionHandler(BindException exception) {
 
         log.error(String.format("Advice: BindException %s", exception.getMessage()), exception);
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(exception.getAllErrors().stream().findFirst()
-                        .map(objectError -> objectError.getDefaultMessage()).orElse("[Err02]처리 중 오류가 발생하였습니다."));
+                .body(
+                        ResponseResult.builder().success(false).errMsg(exception.getAllErrors().stream().findFirst()
+                                .map(objectError -> objectError.getDefaultMessage()).orElse("[Err02]처리 중 오류가 발생하였습니다.")).build()
+                );
     }
 }
