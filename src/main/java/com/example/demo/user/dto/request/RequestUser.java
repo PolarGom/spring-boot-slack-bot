@@ -1,16 +1,14 @@
 package com.example.demo.user.dto.request;
 
-import com.example.demo.common.exception.CommonException;
+import com.example.demo.common.utils.FileUtils;
 import com.example.demo.user.entity.User;
+import com.example.demo.user.exception.DuplicateIdException;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.io.File;
-import java.io.IOException;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * 사용자 요청 정보
@@ -34,17 +32,17 @@ public class RequestUser {
 
     private String profileImageName;
 
-    public void upload() {
-        Optional.ofNullable(profileImgFile).ifPresent(multipartFile -> {
-            try {
-                profileImageName = String.format("%s_%s", UUID.randomUUID(), multipartFile.getOriginalFilename());
+    public void onVerifyDuplicateId(int duplicateIdCount) {
 
-                multipartFile.transferTo(new File(profileImageName));
-            } catch ( IOException e ) {
+        if ( duplicateIdCount != 0 ) {
 
-                throw new CommonException(e, "사용자 프로필 이미지 업로드 중 오류가 발생하였습니다.");
-            }
-        });
+            throw new DuplicateIdException();
+        }
+    }
+
+    public void upload(FileUtils fileUtils) {
+
+        Optional.ofNullable(profileImgFile).ifPresent(multipartFile -> this.profileImageName = fileUtils.upload(multipartFile));
     }
 
     public User toEntity() {

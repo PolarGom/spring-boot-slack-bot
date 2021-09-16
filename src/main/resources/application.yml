@@ -38,7 +38,7 @@ spring:
       on-profile: prod
   servlet:
     multipart:
-      location: /mnt/data/temp/
+      location: /usr/data/temp/
   datasource:
     hikari:
       platform: mysql

@@ -5,6 +5,7 @@ import com.example.demo.user.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +38,23 @@ public class UserController {
         log.info("사용자 등록 정보: {}", requestUser.toString());
 
         userServiceImpl.joinUser(requestUser);
+
+        return ResponseEntity.ok(requestUser.getId());
+    }
+
+    /**
+     * 사용자 수정
+     *
+     * @param userSeq 사용자 키
+     * @param requestUser 사용자 정보
+     * @return result 사용자 아이디
+     */
+    @PostMapping(value = "/user/{userSeq}")
+    public ResponseEntity<String> joinUser(@PathVariable Integer userSeq, @Valid RequestUser requestUser) {
+
+        log.info("{} 키 사용자 수정 정보: {}", userSeq, requestUser.toString());
+
+        userServiceImpl.updateUser(userSeq, requestUser);
 
         return ResponseEntity.ok(requestUser.getId());
     }

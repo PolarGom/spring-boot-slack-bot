@@ -11,4 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @see {@link JpaRepository}
  */
 public interface IUserRepository extends JpaRepository<User, Integer> {
+
+    int countByIdEquals(String id);
 }

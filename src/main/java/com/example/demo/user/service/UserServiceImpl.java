@@ -1,7 +1,9 @@
 package com.example.demo.user.service;
 
 import com.example.demo.common.exception.CommonException;
+import com.example.demo.common.utils.FileUtils;
 import com.example.demo.user.dto.request.RequestUser;
+import com.example.demo.user.entity.User;
 import com.example.demo.user.infra.IUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements IUserService {
 
     @Autowired
+    private FileUtils fileUtils;
+
+    @Autowired
     private IUserRepository userRepository;
 
     @Transactional(value = "entityTransactionManager", rollbackFor = { Exception.class, CommonException.class })
@@ -28,7 +33,8 @@ public class UserServiceImpl implements IUserService {
 
         try {
 
-            requestUser.upload();
+            requestUser.onVerifyDuplicateId(userRepository.countByIdEquals(requestUser.getId()));
+            requestUser.upload(fileUtils);
 
             userRepository.save(requestUser.toEntity());
         } catch ( CommonException e ) {
@@ -37,6 +43,27 @@ public class UserServiceImpl implements IUserService {
         } catch ( Exception e ) {
 
             throw new CommonException(e, "사용자 등록 중 오류가 발생하였습니다.");
+        }
+    }
+
+    @Transactional(value = "entityTransactionManager", rollbackFor = { Exception.class, CommonException.class })
+    @Override
+    public void updateUser(Integer userSeq, RequestUser requestUser) throws CommonException {
+
+        try {
+
+            requestUser.upload(fileUtils);
+
+            User user = userRepository.findById(userSeq).get();
+            user.update(requestUser.getProfileImageName());
+
+            userRepository.save(user);
+        } catch ( CommonException e ) {
+
+            throw e;
+        } catch ( Exception e ) {
+
+            throw new CommonException(e, "사용자 수정 중 오류가 발생하였습니다.");
         }
     }
 }

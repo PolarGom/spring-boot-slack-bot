@@ -18,4 +18,13 @@ public interface IUserService {
      * @throws CommonException
      */
     void joinUser(RequestUser requestUser) throws CommonException;
+
+    /**
+     * 사용자 수정
+     * 
+     * @param userSeq 사용자 키
+     * @param requestUser 사용자 정보
+     * @throws CommonException
+     */
+    void updateUser(Integer userSeq, RequestUser requestUser) throws CommonException;
 }
