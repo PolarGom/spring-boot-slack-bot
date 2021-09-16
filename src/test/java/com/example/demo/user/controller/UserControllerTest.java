@@ -48,4 +48,32 @@ public class UserControllerTest extends CommonControllerTest {
             profileImgFis.close();
         }
     }
+
+    @Test
+    @DisplayName("사용자 수정 테스트")
+    public void testUpdateUser() throws Exception {
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        FileInputStream profileImgFis = null;
+
+        try {
+
+            profileImgFis = new FileInputStream(classLoader.getResource("profile_image.jpeg").getFile());
+            MockMultipartFile profileImgFile = new MockMultipartFile("profileImgFile", "profile_image.jpeg", "multipart/from-data", profileImgFis);
+
+            Integer userSeq = 1;
+
+            this.mockMvc.perform(multipart("/api/v1/user/{0}", userSeq)
+                            .file(profileImgFile))
+                    .andDo(print())
+                    .andExpect(status().isOk())
+                    .andReturn();
+        } catch ( Exception e ) {
+
+            throw e;
+        } finally {
+
+            profileImgFis.close();
+        }
+    }
 }

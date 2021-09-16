@@ -3,6 +3,7 @@ package com.example.demo.user.dto.request;
 import com.example.demo.common.utils.FileUtils;
 import com.example.demo.user.entity.User;
 import com.example.demo.user.exception.DuplicateIdException;
+import com.example.demo.user.validation.UserValidationGroup;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,8 +25,8 @@ import java.util.Optional;
 @EqualsAndHashCode
 public class RequestUser {
 
-    @NotBlank(message = "아이디를 입력해 주세요.")
-    @Size(min = 5, max = 50, message = "아이디는 5 ~ 50자리 사이 입니다.")
+    @NotBlank(message = "아이디를 입력해 주세요.", groups = {UserValidationGroup.joinUser.class})
+    @Size(min = 5, max = 50, message = "아이디는 5 ~ 50자리 사이 입니다.", groups = {UserValidationGroup.joinUser.class})
     private String id;
 
     private MultipartFile profileImgFile;

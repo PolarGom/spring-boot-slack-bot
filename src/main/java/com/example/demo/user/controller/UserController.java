@@ -2,9 +2,11 @@ package com.example.demo.user.controller;
 
 import com.example.demo.user.dto.request.RequestUser;
 import com.example.demo.user.service.IUserService;
+import com.example.demo.user.validation.UserValidationGroup;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +35,7 @@ public class UserController {
      * @return result 사용자 아이디
      */
     @PostMapping(value = "/user/join")
-    public ResponseEntity<String> joinUser(@Valid RequestUser requestUser) {
+    public ResponseEntity<String> joinUser(@Validated(UserValidationGroup.joinUser.class) RequestUser requestUser) {
 
         log.info("사용자 등록 정보: {}", requestUser.toString());
 

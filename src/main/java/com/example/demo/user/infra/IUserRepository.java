@@ -12,5 +12,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface IUserRepository extends JpaRepository<User, Integer> {
 
+    /**
+     * 사용자 아이디 갯수 조회
+     * 
+     * @param id 사용자 아이디
+     * @return result 아이디 갯수
+     */
     int countByIdEquals(String id);
 }
