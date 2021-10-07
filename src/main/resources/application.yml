@@ -30,7 +30,7 @@ spring:
 
 server:
   servlet:
-    context-path: /demo
+    context-path: /chat
 ---
 spring:
   config:
@@ -39,21 +39,6 @@ spring:
   servlet:
     multipart:
       location: /usr/data/temp/
-  datasource:
-    hikari:
-      platform: mysql
-      jdbc-url: jdbc:mysql://127.0.0.1:3300/TEST_DB?useSSL=false&characterEncoding=UTF-8
-      username: root
-      password: mariadb
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      pool-name: db-pool
-      connection-timeout: 30000
-      minimum-idle: 10
-      maximum-pool-size: 30
-      idle-timeout: 600000
-      validation-timeout: 5000
-      max-lifetime: 1800000
-      auto-commit: false
 server:
   port: 9090
 logging:
@@ -66,21 +51,6 @@ spring:
   servlet:
     multipart:
       location: D:/data/temp/
-  datasource:
-    hikari:
-      platform: mysql
-      jdbc-url: jdbc:mysql://127.0.0.1:3300/TEST_DB?useSSL=false&characterEncoding=UTF-8
-      username: root
-      password: mariadb
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      pool-name: db-pool
-      connection-timeout: 30000
-      minimum-idle: 10
-      maximum-pool-size: 30
-      idle-timeout: 600000
-      validation-timeout: 5000
-      max-lifetime: 1800000
-      auto-commit: false
 server:
   port: 9999
 logging:

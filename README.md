@@ -1,5 +1,5 @@
-### Spring Boot Demo
-- Spring Boot 2.5 및 도커 연습
+### Spring Boot Slack Bot
+- Spring Boot 2.5 및 슬랙 봇 연습
 
 #### 실습환경
 - Windows 10 WSL2 

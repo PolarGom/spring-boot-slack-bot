@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,15 @@ public class CommonControllerTest {
 
     protected MockMvc mockMvc;
 
+    protected ObjectMapper jsonObjectMapper;
+
     @BeforeEach
     public void beforeAll() {
+
+        jsonObjectMapper = new ObjectMapper();
 
         mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext)
                 .build();
     }
+
 }
