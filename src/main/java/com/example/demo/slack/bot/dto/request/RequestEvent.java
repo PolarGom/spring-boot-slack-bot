@@ -1,4 +1,4 @@
-package com.example.demo.bot.dto.request;
+package com.example.demo.slack.bot.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -16,6 +16,9 @@ public class RequestEvent {
 
     @JsonProperty("client_msg_id")
     private String clientMsgId;
+
+    @JsonProperty("bot_id")
+    private String botId;
 
     private String type;
 

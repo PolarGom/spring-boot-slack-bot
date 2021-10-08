@@ -1,4 +1,4 @@
-package com.example.demo.bot.dto.response;
+package com.example.demo.slack.bot.dto.response;
 
 import lombok.*;
 

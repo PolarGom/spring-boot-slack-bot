@@ -1,4 +1,4 @@
-package com.example.demo.bot.dto.request;
+package com.example.demo.slack.bot.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

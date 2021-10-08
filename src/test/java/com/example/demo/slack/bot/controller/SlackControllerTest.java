@@ -1,7 +1,7 @@
-package com.example.demo.bot.controller;
+package com.example.demo.slack.bot.controller;
 
 import com.example.demo.CommonControllerTest;
-import com.example.demo.bot.dto.request.RequestEventSub;
+import com.example.demo.slack.bot.dto.request.RequestEventSub;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * 슬랙 봇 컨트롤러 테스트
  */
-public class BotControllerTest extends CommonControllerTest {
+public class SlackControllerTest extends CommonControllerTest {
 
     @Test
     @DisplayName("슬랩 봇 URL Verify 테스트" )
