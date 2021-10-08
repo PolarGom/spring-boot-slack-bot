@@ -34,7 +34,7 @@ public class SlackBotAdapterImpl implements IBotAdapter<RequestEventSub> {
 
         try {
 
-            if ( !StringUtils.hasText(requestEventSub.getEvent().getBotId()) && !StringUtils.hasText(requestEventSub.getChallenge()) ) {
+            if ( !StringUtils.hasText(requestEventSub.getEvent().getClientMsgId()) && !StringUtils.hasText(requestEventSub.getChallenge()) ) {
 
                 RequestBotMessage botMessage = RequestBotMessage.builder()
                         .room(requestEventSub.getEvent().getChannel())

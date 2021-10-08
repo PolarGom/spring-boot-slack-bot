@@ -33,7 +33,7 @@ server:
     context-path: /chat
 
 slack:
-  token: xoxb-2578660269492-2561788514343-EvCqbqS6oDZyM2DmQCUKTOxm
+  token: xoxb
 ---
 spring:
   config:
